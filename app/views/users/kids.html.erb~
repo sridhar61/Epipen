@@ -1,0 +1,59 @@
+
+
+
+
+<div class="container">
+
+<%= link_to "Upload kid details", create_kid_form_users_path %><br/> <br/>
+<table border='1'>
+  <% if @kids.present? %>
+  <tr>
+    <th> Name of the kid </th>
+    <th>Allergy</th>
+    <th>Amount</th>
+  </tr>
+  <% else %>
+    <div class="alert alert-danger">
+  <strong>Please upload your kid details!</strong>
+</div>
+  <% end %>
+  <% @kids.each do  |kid| %>
+  <tr>
+    <td><%= kid.name %></td>
+    <td><%= kid.allergy  ? "Yes" : "No" %></td>
+    <td><%= kid.allergy ? "600" : "0" %></td>
+  </tr>
+  <% end %>
+  
+ </table> 
+  <br/><br/>
+  
+  <h1>Contribution of each parent</h1>
+  
+ <table border='1'>  
+  <% if @users.present? %>
+  <tr>
+    <th>Email of the parent </th>
+    <th>Kids</th>
+    <th>Amount</th>
+  </tr>
+  <% else %>
+   <div class="alert alert-danger">
+  <strong>No other parent contributions</strong>
+</div> 
+  <% end %>
+  <% @users.each do  |user| %>
+  <tr>
+    <td><%= user.email %></td>
+    <td><% user.kids.map(&:name).each do |name| %>
+          <%= name %><br/>
+        <% end %>
+    </td>
+    <td><%= user.kids.map(&:amount).inject(0){|sum,x| sum + x } %></td>
+  </tr>
+  <% end %>
+  
+  
+</table>
+
+</div>

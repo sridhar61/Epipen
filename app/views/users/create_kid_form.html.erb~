@@ -1,0 +1,18 @@
+<%= form_tag(create_kid_users_path) do %>
+  
+  Name : <%= text_field_tag 'name' %> <br/><br/>
+ 
+  School : <%= select_tag 'School', options_from_collection_for_select(School.all, 'id', 'name')  %>  
+  <br/><br/>
+  
+  Allergy : <br/><br/>
+  
+  Yes : <%= radio_button_tag 'allergy', true , true %>
+  
+  
+  No : <%= radio_button_tag 'allergy', false, false %>
+  
+  <br/><br/>
+  
+  <%= submit_tag "Submit" %>
+<% end %>
